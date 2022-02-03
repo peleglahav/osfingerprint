@@ -4,6 +4,8 @@ from scapy.all import *
 from t2_7 import TTest
 from ie import IETest
 from db_utils import DBUtils
+from packet_utils import PacketUtils
+from check_match_os import CheckMatchOS
 from fingerprint_record import FingerprintRecord
 
 def main():
@@ -19,22 +21,25 @@ def main():
 
 
     #Utils 
-    utils = DBUtils()
+    db_utils = DBUtils()
+    packet_utils = PacketUtils()
 
     #Init DB
     fingerprints_db = []
-    utils.parse_os_db('os_db.txt', fingerprints_db) 
+    db_utils.parse_os_db('os_db.txt', fingerprints_db) 
 
     # Run Tests
-    tcp_test = TTest(utils)
+    tcp_test = TTest(packet_utils)
     fingerprint = tcp_test.run_tcp_tests(args.target, args.verbose)
     #fingerprint = run_tcp_tests(args.target, args.verbose)
-    icmp_test = IETest(utils)
+    icmp_test = IETest(packet_utils)
     fingerprint += icmp_test.run_icmp_tests(args.target, args.verbose)
     
     # Match Results
-    logging.info(f'My test {fingerprint}')
-    utils.check_match_os(FingerprintRecord(utils, fingerprint), fingerprints_db)
+    logging.info(f'\n\nMy test results {fingerprint}')
+    unknown_fingerprint = FingerprintRecord(db_utils, fingerprint)
+    checker = CheckMatchOS()
+    checker.check_match_os(unknown_fingerprint, fingerprints_db)
 
 
 if __name__ == "__main__":

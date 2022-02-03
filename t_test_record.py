@@ -52,7 +52,6 @@ class TTestRecord():
 
             self.tcp_options = OptionsFormat()
             self.tcp_options.set_options_by_str(params['O'][0] if 'O' in params else '')
-            #self.tcp_options = params['O'] if 'O' in params else None
             self.rst_data_crc32 = [int(value, 16) for value in params['RD']]
             self.tcp_miscellaneous = params['Q'] if 'Q' in params else None
     
