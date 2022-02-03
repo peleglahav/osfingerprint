@@ -384,7 +384,7 @@ def split_db_test_string_to_params(test):
     return params
 
 def parse_os_db(db_path):
-    with open(db_path, 'rt') as db_file:
+    with open(db_path, 'rb') as db_file:
         fingerprint = ''
         line = db_file.readline()
         while line != '':
