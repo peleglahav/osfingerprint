@@ -1,9 +1,7 @@
-from utils import split_db_test_string_to_params
-from utils import is_fields_match
-
 class IETestRecord():
-    def __init__(self, test='IE(DFI=%T=%TG=%CD=)'):
-        params = split_db_test_string_to_params(test)
+    def __init__(self, utils, test='IE(DFI=%T=%TG=%CD=)'):
+        self.utils = utils
+        params = self.utils.split_db_test_string_to_params(test)
 
         self.responsed = False
         if 'R' not in params:
@@ -18,11 +16,11 @@ class IETestRecord():
             score += 50
         elif self.responsed and other.responsed:
             score += 50
-            if is_fields_match(self.dont_fragment, other.dont_fragment):
+            if self.utils.is_fields_match(self.dont_fragment, other.dont_fragment):
                 score += 40
-            if is_fields_match(self.ttl, other.ttl):
+            if self.utils.is_fields_match(self.ttl, other.ttl):
                 score += 15
-            if is_fields_match(self.reply_code, other.reply_code):
+            if self.utils.is_fields_match(self.reply_code, other.reply_code):
                 score += 100
         return score
 

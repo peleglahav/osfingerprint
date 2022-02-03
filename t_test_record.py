@@ -1,6 +1,4 @@
 from options_format import OptionsFormat
-from utils import split_db_test_string_to_params
-from utils import is_fields_match
 
 TESTS_POINTS = [
     {'R': 80,  'DF': 20, 'T': 15, 'TG': 15, 'W': 25, 'S': 20, 'A': 20, 'F': 30, 'O': 10, 'RD': 20, 'Q': 20},
@@ -12,8 +10,9 @@ TESTS_POINTS = [
 ]
 
 class TTestRecord():
-    def __init__(self, test='T?(R=%DF=%T=%TG=%W=%S=%A=%F=%O=%RD=%Q=)'):
-        params = split_db_test_string_to_params(test)
+    def __init__(self, utils ,test='T?(R=%DF=%T=%TG=%W=%S=%A=%F=%O=%RD=%Q=)'):
+        self.utils = utils
+        params = self.utils.split_db_test_string_to_params(test)
 
         self.responsed = params['R'] # 'Y' / 'N'
         if 'Y' in params['R']:
@@ -63,21 +62,21 @@ class TTestRecord():
         if 'N' in self.responsed and 'N' in other.responsed:
             score += TESTS_POINTS[number]['R']
         elif 'Y' in self.responsed and 'Y' in other.responsed:
-            if is_fields_match(self.dont_fragment, other.dont_fragment):
+            if self.utils.is_fields_match(self.dont_fragment, other.dont_fragment):
                 score += TESTS_POINTS[number]['DF']
-            if is_fields_match(self.ttl, other.ttl):
+            if self.utils.is_fields_match(self.ttl, other.ttl):
                 score += TESTS_POINTS[number]['TG']
-            if is_fields_match(self.tcp_window_size, other.tcp_window_size):
+            if self.utils.is_fields_match(self.tcp_window_size, other.tcp_window_size):
                 score += TESTS_POINTS[number]['W']
-            if is_fields_match(self.seq, other.seq):
+            if self.utils.is_fields_match(self.seq, other.seq):
                 score += TESTS_POINTS[number]['S']
-            if is_fields_match(self.ack, other.ack):
+            if self.utils.is_fields_match(self.ack, other.ack):
                 score += TESTS_POINTS[number]['A']
-            if is_fields_match(self.tcp_flags, other.tcp_flags):
+            if self.utils.is_fields_match(self.tcp_flags, other.tcp_flags):
                 score += TESTS_POINTS[number]['F']
-            if is_fields_match(self.rst_data_crc32, other.rst_data_crc32):
+            if self.utils.is_fields_match(self.rst_data_crc32, other.rst_data_crc32):
                 score += TESTS_POINTS[number]['RD']
-            if is_fields_match(self.tcp_miscellaneous, other.tcp_miscellaneous):
+            if self.utils.is_fields_match(self.tcp_miscellaneous, other.tcp_miscellaneous):
                 score += TESTS_POINTS[number]['Q']
 
             if self.tcp_options.is_equal(other.tcp_options):

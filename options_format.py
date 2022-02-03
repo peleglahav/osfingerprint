@@ -1,6 +1,5 @@
 from string import hexdigits
 
-
 class OptionsFormat(object):
     def __init__(self):
         self.mss = 0
