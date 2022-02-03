@@ -20,7 +20,7 @@ def main():
     logging.basicConfig(format='%(asctime)s | %(levelname)s\t| %(message)s', datefmt="%Y-%m-%d %H:%M:%S", level=logging_level)
 
 
-    #Utils 
+    #Init utils 
     db_utils = DBUtils()
     packet_utils = PacketUtils()
 
@@ -28,10 +28,10 @@ def main():
     fingerprints_db = []
     db_utils.parse_os_db('os_db.txt', fingerprints_db) 
 
-    # Run Tests
+    #Run Tests
     tcp_test = TTest(packet_utils)
     fingerprint = tcp_test.run_tcp_tests(args.target, args.verbose)
-    #fingerprint = run_tcp_tests(args.target, args.verbose)
+    
     icmp_test = IETest(packet_utils)
     fingerprint += icmp_test.run_icmp_tests(args.target, args.verbose)
     
@@ -43,5 +43,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()

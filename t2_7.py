@@ -1,4 +1,3 @@
-import logging
 from scapy.all import *
 
 COMMON_OPTIONS = [
