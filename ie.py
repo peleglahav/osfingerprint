@@ -1,4 +1,3 @@
-
 from scapy.all import *
 from os_db_parser import get_initial_ttl_guess
 from t2_7 import send_test_packet
