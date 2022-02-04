@@ -1,4 +1,3 @@
-import logging 
 from scapy.all import *
 from fingerprint_record import FingerprintRecord
 

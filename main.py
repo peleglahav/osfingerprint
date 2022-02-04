@@ -1,7 +1,7 @@
 import argparse
 import logging
 from scapy.all import *
-from t2_7 import TTest
+from run_t_test import TTest
 from ie import IETest
 from db_utils import DBUtils
 from packet_utils import PacketUtils
