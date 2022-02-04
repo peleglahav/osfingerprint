@@ -11,9 +11,20 @@ class TCPTest():
     def __init__(self, utils):
         self.utils = utils
 
+    def find_open_tcp_port(self, target):
+        return 443 #for testing
+        for port in range(80,65535):
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            socket.setdefaulttimeout(1)
+            logging.info('Scanning port: {}'.format(port))
+            result = s.connect_ex((target,port))
+            if result == 0: #Port is open!
+                return port
+            s.close()
+
     def run_opened_port_tests(self, ip, verbose):
         open_port_tests = [T2, T3, T4]
-        open_port = 443
+        open_port = self.find_open_tcp_port(ip)
 
         open_test_records = ""
 
