@@ -1,12 +1,12 @@
 import argparse
 import logging
 from scapy.all import *
-from run_t_test import TTest
-from ie import IETest
-from db_utils import DBUtils
-from packet_utils import PacketUtils
-from check_match_os import CheckMatchOS
-from fingerprint_record import FingerprintRecord
+from test_runs.run_tcp import TTest
+from test_runs.run_icmp import IETest
+from utils.db_utils import DBUtils
+from utils.packet_utils import PacketUtils
+from models.check_match_os import CheckMatchOS
+from models.fingerprint_record import FingerprintRecord
 
 def main():
     # Parse ARGS
@@ -26,7 +26,7 @@ def main():
 
     #Init DB
     fingerprints_db = []
-    db_utils.parse_os_db('os_db.txt', fingerprints_db) 
+    db_utils.parse_os_db('data\os_db.txt', fingerprints_db) 
 
     #Run Tests
     tcp_test = TTest(packet_utils)

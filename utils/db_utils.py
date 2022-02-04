@@ -1,5 +1,5 @@
 from scapy.all import *
-from fingerprint_record import FingerprintRecord
+from models.fingerprint_record import FingerprintRecord
 
 class DBUtils():
     def __init__(self):

@@ -1,6 +1,6 @@
 import logging 
 from scapy.all import *
-from options_format import OptionsFormat
+from models.options_format import OptionsFormat
 
 class PacketUtils():
     def __init__(self):

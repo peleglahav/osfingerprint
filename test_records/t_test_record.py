@@ -1,4 +1,4 @@
-from options_format import OptionsFormat
+from models.options_format import OptionsFormat
 
 TESTS_POINTS = [
     {'R': 80,  'DF': 20, 'T': 15, 'TG': 15, 'W': 25, 'S': 20, 'A': 20, 'F': 30, 'O': 10, 'RD': 20, 'Q': 20},
