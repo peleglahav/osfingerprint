@@ -7,7 +7,7 @@ from tcp_tests.t5 import T5
 from tcp_tests.t6 import T6
 from tcp_tests.t7 import T7
 
-class TTest():
+class TCPTest():
     def __init__(self, utils):
         self.utils = utils
 

@@ -25,7 +25,7 @@ class CheckMatchOS:
                 max_score = score
                 matching_scores[str(f)] = max_score
 
-        logging.info('Best scores: '.format(matching_scores))
+        logging.info('Top match scores: '.format(matching_scores))
         for k, v in matching_scores.items():
             logging.info(f'Score: {v}\n{k}\n')
 

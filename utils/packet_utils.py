@@ -17,7 +17,7 @@ class PacketUtils():
         logging.info(f'############ End: {test_name} ############')
         return r
 
-    def __get_initial_ttl_guess(self, ttl):
+    def get_initial_ttl_guess(self, ttl):
         if (ttl <= 32):
             return 32
         elif ttl <= 64:
@@ -40,7 +40,7 @@ class PacketUtils():
             else:
                 s += 'DF=N%'
 
-            s += 'TG=' + hex(self.__get_initial_ttl_guess(ip_part.ttl))[2:].upper() + '%'
+            s += 'TG=' + hex(self.get_initial_ttl_guess(ip_part.ttl))[2:].upper() + '%'
 
             tcp_part = packet_received[TCP]
             

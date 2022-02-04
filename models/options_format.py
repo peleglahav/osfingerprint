@@ -102,20 +102,3 @@ class OptionsFormat(object):
                self.tsval == other.tsval and \
                self.tsecr == other.tsecr and \
                self.sackok == other.sackok
-               
-    def get_score(self, other):
-        score = 0
-        if self.mss == other.mss:
-            score += 0.5
-        if self.nops == other.nops:
-            score += 0.5
-        if self.wscale == other.wscale:
-            score += 0.5
-        if self.tsval == other.tsval:
-            score += 0.5
-        if self.tsecr == other.tsecr:
-            score += 0.5
-        if self.sackok == other.sackok:
-            score += 0.5
-        return score
-

@@ -6,6 +6,7 @@ class FingerprintRecord():
         self.fingerprint_str = fingerprint
         fingerprint_lines = fingerprint.split('\n')[:-1]
         self.fingerprint_name = fingerprint_lines[0].split('Fingerprint ')[-1]
+        
         self.T2 = TTestRecord(utils, fingerprint_lines[1])
         self.T3 = TTestRecord(utils, fingerprint_lines[2])
         self.T4 = TTestRecord(utils, fingerprint_lines[3])
