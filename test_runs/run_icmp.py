@@ -15,7 +15,6 @@ class IETest():
         ie2 = IE2(self.utils)
         packet2, res2 = ie2.test(ip, ip_id+1, req_id+1, verbose)
 
-        # Create Test String Line
         if res1 and res2:
             s = 'IE('
         
