@@ -1,6 +1,6 @@
 from scapy.all import *
-from icmp_tests.ie1 import IE1
-from icmp_tests.ie2 import IE2
+from icmp_tests.ie_p1 import IEP1
+from icmp_tests.ie_p2 import IEP2
 
 class IETest():
     def __init__(self, utils):
@@ -10,9 +10,9 @@ class IETest():
         ip_id = random.randint(20000, 30000) # Get a random IP ID
         req_id = random.randint(10000, 20000) # Get a random request ID
 
-        ie1 = IE1(self.utils)
+        ie1 = IEP1(self.utils)
         packet1, res1 = ie1.test(ip, ip_id, req_id, verbose)
-        ie2 = IE2(self.utils)
+        ie2 = IEP2(self.utils)
         packet2, res2 = ie2.test(ip, ip_id+1, req_id+1, verbose)
 
         if res1 and res2:

@@ -1,6 +1,6 @@
 from scapy.all import *
 
-class IE2():
+class IEP2():
     def __init__(self, utils):
         self.utils = utils
 
@@ -10,5 +10,5 @@ class IE2():
         raw = Raw(load='B' * 150)
 
         packet = p/icmp/raw
-        res = self.utils.send_test_packet(packet, 'IE2', verbose)
+        res = self.utils.send_test_packet(packet, 'IE-P2', verbose)
         return (packet, res)

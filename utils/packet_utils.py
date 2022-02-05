@@ -7,14 +7,14 @@ class PacketUtils():
         pass
 
     def send_test_packet(self, packet, test_name, verbose=False):
-        logging.info(f'############ Start: {test_name} ############')
+        logging.info(f'Start: {test_name}')
         r = sr1(packet, verbose=verbose, timeout=2)
         if verbose:
             if r:
                 logging.info('Answer: {}'.format(r.summary()))
             else:
                 logging.info('No Answer Received!')
-        logging.info(f'############ End: {test_name} ############')
+        logging.info(f'End: {test_name}')
         return r
 
     def get_initial_ttl_guess(self, ttl):

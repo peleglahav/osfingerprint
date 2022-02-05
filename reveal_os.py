@@ -35,9 +35,9 @@ def main():
     
     icmp_test = IETest(packet_utils)
     fingerprint += icmp_test.run_icmp_tests(args.target, args.explain)
+    logging.info(f'\n\n{fingerprint}')
     
     # Match Results
-    logging.info(f'\n\nMy test results {fingerprint}')
     target_fingerprint = FingerprintRecord(db_utils, fingerprint)
     checker = CheckMatchOS()
     checker.check_match_os(target_fingerprint, fingerprints_db)

@@ -17,16 +17,14 @@ class CheckMatchOS:
         match_fingerprint = None
         max_score = 0
 
-        matching_scores = {}
         for f in fingerprints_db:
             score = self.__calculate_match_score(f, unknown_fingerprint)
             if score > max_score:
                 match_fingerprint = f
                 max_score = score
-                matching_scores[str(f)] = max_score
 
-        logging.info('Top match scores: '.format(matching_scores))
-        for k, v in matching_scores.items():
-            logging.info(f'Score: {v}\n{k}\n')
+        logging.info('\n\nTop match')
+        logging.info(f'Score: {max_score}\n{str(match_fingerprint)}\n')
+
 
         return match_fingerprint
