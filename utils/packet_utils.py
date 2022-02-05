@@ -11,9 +11,9 @@ class PacketUtils():
         r = sr1(packet, verbose=verbose, timeout=2)
         if verbose:
             if r:
-                logging.info('Answer: {}'.format(r.summary()))
+                logging.info('Answer Received: {}'.format(r.summary()))
             else:
-                logging.info('No Answer Received!')
+                logging.info('No Answer Received')
         logging.info(f'End: {test_name}')
         return r
 
