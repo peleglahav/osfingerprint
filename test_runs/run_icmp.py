@@ -1,47 +1,38 @@
 from scapy.all import *
+from icmp_tests.ie1 import IE1
+from icmp_tests.ie2 import IE2
 
 class IETest():
     def __init__(self, utils):
         self.utils = utils
 
-    def get_closed_port(self):
-        return random.randint(20000, 30000) 
-	
-    def get_random_ipid(self):
-        return random.randint(20000, 30000) 
-
-    def get_random_request_id(self):
-        return random.randint(10000, 20000)
-        
     def run_icmp_tests(self, ip, verbose=False):
-        # Run Test
-        ipid = self.get_random_ipid()
-        reqid = self.get_random_request_id()
+        ip_id = random.randint(20000, 30000) # Get a random IP ID
+        req_id = random.randint(10000, 20000) # Get a random request ID
 
-        p1 = IP(dst=ip, flags='DF', tos=0, id=ipid)/ICMP(code=9, seq=295, id=reqid)/Raw(load='A' * 120)
-        r1 = self.utils.send_test_packet(p1, 'IE1', verbose)
-
-        p2 = IP(dst=ip, tos=4, id=ipid+1)/ICMP(code=0, seq=296, id=reqid+1)/Raw(load='B' * 150)
-        r2 = self.utils.send_test_packet(p2, 'IE2', verbose)
+        ie1 = IE1(self.utils)
+        packet1, res1 = ie1.test(ip, ip_id, req_id, verbose)
+        ie2 = IE2(self.utils)
+        packet2, res2 = ie2.test(ip, ip_id+1, req_id+1, verbose)
 
         # Create Test String Line
-        if r1 and r2:
+        if res1 and res2:
             s = 'IE('
         
-            if 'DF' not in r1[IP].flags and 'DF' not in r2[IP].flags:
+            if 'DF' not in res1[IP].flags and 'DF' not in res2[IP].flags:
                 s += 'DFI=N%'
-            elif p1[IP].flags.DF == r1[IP].flags.DF and p2[IP].flags.DF == r2[IP].flags.DF:
+            elif packet1[IP].flags.DF == res1[IP].flags.DF and packet2[IP].flags.DF == res2[IP].flags.DF:
                 s += 'DFI=S%'
-            elif 'DF' in r1[IP].flags and 'DF' in r2[IP].flags:
+            elif 'DF' in res1[IP].flags and 'DF' in res2[IP].flags:
                 s += 'DFI=Y%'
             else:
                 s += 'DFI=O%'
 
-            s += 'TG=' + hex(self.utils.get_initial_ttl_guess(r1[IP].ttl))[2:].upper() + '%'
+            s += 'TG=' + hex(self.utils.get_initial_ttl_guess(res1[IP].ttl))[2:].upper() + '%'
 
-            if r1[ICMP].code == 0 and r2[ICMP].code == 0:
+            if res1[ICMP].code == 0 and res2[ICMP].code == 0:
                 s += 'CD=Z)'
-            elif r1[ICMP].code == p1[ICMP].code and r2[ICMP].code == p2[ICMP].code:
+            elif res1[ICMP].code == packet1[ICMP].code and res2[ICMP].code == packet2[ICMP].code:
                 s += 'CD=S)'
         else:
             s = 'IE(R=N)'
