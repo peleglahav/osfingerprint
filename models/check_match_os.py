@@ -23,8 +23,8 @@ class CheckMatchOS:
                 match_fingerprint = f
                 max_score = score
 
-        logging.info('\n\nTop match')
-        logging.info(f'Score: {max_score}\n{str(match_fingerprint)}\n')
+        #logging.info('Top match')
+        logging.info(f'Top Match Score: {max_score}\nMatched {str(match_fingerprint)}\n')
 
 
         return match_fingerprint

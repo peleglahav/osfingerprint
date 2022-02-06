@@ -50,9 +50,7 @@ class TCPTest():
         return closed_test_records
 
     def run_tcp_tests(self, ip, verbose=False):
-        fingerprint = 'Fingerprint Testing...\n'
-
-        fingerprint += self.run_opened_port_tests(ip, verbose)
+        fingerprint = self.run_opened_port_tests(ip, verbose)
 
         fingerprint += self.run_closed_port_tests(ip, verbose)
 

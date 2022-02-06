@@ -30,8 +30,10 @@ def main():
     db_utils.parse_os_db(DB_PATH, fingerprints_db) 
 
     #Run Tests
+    fingerprint = 'Target encoded fingerprint:\n'
+
     tcp_test = TCPTest(packet_utils)
-    fingerprint = tcp_test.run_tcp_tests(args.target, args.explain)
+    fingerprint += tcp_test.run_tcp_tests(args.target, args.explain)
     
     icmp_test = IETest(packet_utils)
     fingerprint += icmp_test.run_icmp_tests(args.target, args.explain)

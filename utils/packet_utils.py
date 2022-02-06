@@ -8,7 +8,7 @@ class PacketUtils():
 
     def send_test_packet(self, packet, test_name, verbose=False):
         logging.info(f'Start: {test_name}')
-        r = sr1(packet, verbose=verbose, timeout=2)
+        r = sr1(packet, verbose=verbose, timeout=2) #Beggin emission. Finished sending 1 package. Received 1 packets, got 0 answers, remaining 1 packets
         if verbose:
             if r:
                 logging.info('Answer Received: {}'.format(r.summary()))
