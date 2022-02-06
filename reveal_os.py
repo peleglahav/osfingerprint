@@ -19,7 +19,7 @@ def main():
 
     # Set logging
     logging_level = logging.DEBUG if args.explain else logging.INFO
-    logging.basicConfig(format='%(asctime)s | %(levelname)s\t| %(message)s', datefmt="%Y-%m-%d %H:%M:%S", level=logging_level)
+    logging.basicConfig(format='%(asctime)s | %(levelname)s\t| %(message)s', datefmt="%d-%m-%Y %H:%M:%S", level=logging_level)
 
     #Init utils 
     db_utils = DBUtils()
