@@ -6,14 +6,14 @@ class IETest():
     def __init__(self, utils):
         self.utils = utils
 
-    def run_icmp_tests(self, ip, verbose=False):
+    def run_icmp_tests(self, ip):
         ip_id = random.randint(20000, 30000) # Get a random IP ID
         req_id = random.randint(10000, 20000) # Get a random request ID
 
         ie1 = IEP1(self.utils)
-        packet1, res1 = ie1.test(ip, ip_id, req_id, verbose)
+        packet1, res1 = ie1.test(ip, ip_id, req_id)
         ie2 = IEP2(self.utils)
-        packet2, res2 = ie2.test(ip, ip_id+1, req_id+1, verbose)
+        packet2, res2 = ie2.test(ip, ip_id+1, req_id+1)
 
         if res1 and res2:
             s = 'IE('

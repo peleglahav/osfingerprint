@@ -22,7 +22,7 @@ class TCPTest():
                 return port
             s.close()
 
-    def run_opened_port_tests(self, ip, verbose):
+    def run_opened_port_tests(self, ip):
         open_port_tests = [T2, T3, T4]
         open_port = self.find_open_tcp_port(ip)
 
@@ -30,28 +30,28 @@ class TCPTest():
 
         for test_class in open_port_tests:
             test_case = test_class(self.utils)
-            packet_send, packet_received = test_case.test(ip, open_port, verbose)
+            packet_send, packet_received = test_case.test(ip, open_port)
 
             open_test_records += self.utils.get_test_record_from_packet(test_case.number, packet_send, packet_received) + '\n'
         
         return open_test_records
 
-    def run_closed_port_tests(self, ip, verbose):
+    def run_closed_port_tests(self, ip):
         closed_port_tests = [T5, T6, T7]
         closed_test_records = ""
         
         for test_class in closed_port_tests:
             test_case = test_class(self.utils)
             closed_port = random.randint(20000, 30000)
-            packet_send, packet_received = test_case.test(ip, closed_port, verbose)
+            packet_send, packet_received = test_case.test(ip, closed_port)
 
             closed_test_records += self.utils.get_test_record_from_packet(test_case.number, packet_send, packet_received) + '\n'
         
         return closed_test_records
 
-    def run_tcp_tests(self, ip, verbose=False):
-        fingerprint = self.run_opened_port_tests(ip, verbose)
+    def run_tcp_tests(self, ip):
+        fingerprint = self.run_opened_port_tests(ip)
 
-        fingerprint += self.run_closed_port_tests(ip, verbose)
+        fingerprint += self.run_closed_port_tests(ip)
 
         return fingerprint

@@ -7,7 +7,7 @@ class T6(TBase):
         self.number = 6
         self.common_options = self.common_options + [('WScale', 10)]
 
-    def test(self, ip, port,verbose=False):
+    def test(self, ip, port):
         ip = IP(dst=ip, flags='DF')
         sequence_number=random.randint(20000, 30000)
         acknowledgement=random.randint(20000, 30000)
@@ -15,5 +15,5 @@ class T6(TBase):
         
 
         p = ip/tcp
-        r = self.utils.send_test_packet(p, 'T6', verbose=verbose)
+        r = self.utils.send_test_packet(p, 'T6')
         return (p, r)
