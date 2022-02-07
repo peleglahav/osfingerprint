@@ -1,4 +1,4 @@
-class IETestRecord():
+class IEScoreRecord():
     def __init__(self, utils, test='IE(DFI=%T=%TG=%CD=)'):
         self.utils = utils
         params = self.utils.split_db_test_string_to_params(test)
@@ -10,7 +10,7 @@ class IETestRecord():
             self.ttl = [int(value, 16) for value in params['TG']]
             self.reply_code = params['CD']
             
-    def calculate_test_match_score(self, other):
+    def calculate_nmap_score(self, other):
         """
         Scoring method for NMAP ICMP Echo test
         Implemented as stated in NMAP Documentation

@@ -14,5 +14,5 @@ class IEP2():
         raw = Raw(load='B' * 150)
 
         packet = p/icmp/raw
-        res = self.utils.send_test_packet(packet, 'IE-P2')
+        res = self.utils.send_packet(packet, 'IE-P2')
         return (packet, res)

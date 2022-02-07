@@ -11,7 +11,7 @@ class TCPTest():
     def __init__(self, utils):
         self.utils = utils
 
-    def find_open_tcp_port(self, target):
+    def find_open_port(self, target):
         return 443 #for demo
         for port in range(80,65535):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -28,7 +28,7 @@ class TCPTest():
         Send the packets to target and keep track of results
         """
         open_port_tests = [T2, T3, T4]
-        open_port = self.find_open_tcp_port(ip)
+        open_port = self.find_open_port(ip)
 
         open_test_records = ""
 
@@ -36,7 +36,7 @@ class TCPTest():
             test_case = test_class(self.utils)
             packet_send, packet_received = test_case.test(ip, open_port)
 
-            open_test_records += self.utils.get_test_record_from_packet(test_case.number, packet_send, packet_received) + '\n'
+            open_test_records += self.utils.create_record_from_packet(test_case.number, packet_send, packet_received) + '\n'
         
         return open_test_records
 
@@ -53,7 +53,7 @@ class TCPTest():
             closed_port = random.randint(20000, 30000) # rabdom port, no need to check if actualy open
             packet_send, packet_received = test_case.test(ip, closed_port)
 
-            closed_test_records += self.utils.get_test_record_from_packet(test_case.number, packet_send, packet_received) + '\n'
+            closed_test_records += self.utils.create_record_from_packet(test_case.number, packet_send, packet_received) + '\n'
         
         return closed_test_records
 

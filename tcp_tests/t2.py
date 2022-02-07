@@ -17,5 +17,5 @@ class T2(TBase):
         tcp = TCP(sport=13337, dport=port, window=128, options=self.common_options, seq=sequence_number, ack=acknowledgement)
         
         p = ip/tcp
-        r = self.utils.send_test_packet(p, 'T2')
+        r = self.utils.send_packet(p, 'T2')
         return (p, r)

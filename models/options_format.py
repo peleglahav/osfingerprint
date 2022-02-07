@@ -1,6 +1,6 @@
 from string import hexdigits
 
-class OptionsFormat(object):
+class OptionsFormat():
     def __init__(self):
         self.mss = 0
         self.nops = 0
@@ -12,7 +12,7 @@ class OptionsFormat(object):
 
         self.representation = ''
 
-    def set_options_by_str(self, options):
+    def create_options_from_str(self, options):
         self.representation = options
         if options == '':
             return
@@ -51,7 +51,7 @@ class OptionsFormat(object):
             if i == len(options):
                 return
 
-    def set_representation(self):
+    def create_repr(self):
         s = ''
         
         if self.mss:
@@ -68,7 +68,7 @@ class OptionsFormat(object):
         
         self.representation = s
 
-    def set_options_by_packet(self, options):
+    def create_options_from_packet(self, options):
         for option in options:
             name = option[0]
             value = option[1]
@@ -93,7 +93,7 @@ class OptionsFormat(object):
             elif name == 'SAckOK':
                 self.sackok = True
 
-        self.set_representation()
+        self.create_repr()
 
     def is_equal(self, other):
         return self.mss == other.mss and \

@@ -9,7 +9,7 @@ TESTS_POINTS = [
     {'R': 80,  'DF': 20, 'T': 15, 'TG': 15, 'W': 25, 'S': 20, 'A': 20, 'F': 30, 'O': 10, 'RD': 20, 'Q': 20},
 ]
 
-class TTestRecord():
+class TCPScoreRecord():
     def __init__(self, utils ,test='T?(R=%DF=%T=%TG=%W=%S=%A=%F=%O=%RD=%Q=)'):
         self.utils = utils
         params = self.utils.split_db_test_string_to_params(test)
@@ -25,11 +25,11 @@ class TTestRecord():
             self.tcp_flags = params['F'] # E / U / A / P / R / S / F
 
             self.tcp_options = OptionsFormat()
-            self.tcp_options.set_options_by_str(params['O'][0] if 'O' in params else '')
+            self.tcp_options.create_options_from_str(params['O'][0] if 'O' in params else '')
             self.rst_data_crc32 = [int(value, 16) for value in params['RD']]
             self.tcp_miscellaneous = params['Q'] if 'Q' in params else None
     
-    def calculate_test_match_score(self, number, other):
+    def calculate_nmap_score(self, number, other):
         """
         Scoring method for NMAP TCP test
         Implemented as stated in NMAP Documentation

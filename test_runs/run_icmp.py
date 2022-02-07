@@ -35,7 +35,7 @@ class IETest():
             else:
                 s += 'DFI=O%'
 
-            s += 'TG=' + hex(self.utils.get_initial_ttl_guess(res1[IP].ttl))[2:].upper() + '%'
+            s += 'TG=' + hex(self.utils.guess_ttl(res1[IP].ttl))[2:].upper() + '%'
 
             if res1[ICMP].code == 0 and res2[ICMP].code == 0:
                 s += 'CD=Z)'

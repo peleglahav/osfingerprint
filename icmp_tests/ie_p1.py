@@ -14,5 +14,5 @@ class IEP1():
         raw = Raw(load='A' * 120)
 
         packet = p/icmp/raw
-        res = self.utils.send_test_packet(packet, 'IE-P1')
+        res = self.utils.send_packet(packet, 'IE-P1')
         return (packet, res)

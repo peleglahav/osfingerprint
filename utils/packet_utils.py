@@ -7,7 +7,7 @@ class PacketUtils():
         self.explain = explain
         pass
 
-    def send_test_packet(self, packet, test_name):
+    def send_packet(self, packet, test_name):
         """
         Send the packet using scapy.
         Notice the log level of scapy and the fact that it sniffs in raw.
@@ -22,7 +22,7 @@ class PacketUtils():
         logging.info(f'End: {test_name}')
         return r
 
-    def get_initial_ttl_guess(self, ttl):
+    def guess_ttl(self, ttl):
         """
         Return a proximate TTL guessed based on common values
         """
@@ -35,7 +35,7 @@ class PacketUtils():
         else:
             return 255
     
-    def get_test_record_from_packet(self, number, packet_sent, packet_received):
+    def create_record_from_packet(self, number, packet_sent, packet_received):
         """
         Create a test encoding string based on NMAP format
         Built on the packages sent back
@@ -52,7 +52,7 @@ class PacketUtils():
             else:
                 s += 'DF=N%'
 
-            s += 'TG=' + hex(self.get_initial_ttl_guess(ip_part.ttl))[2:].upper() + '%'
+            s += 'TG=' + hex(self.guess_ttl(ip_part.ttl))[2:].upper() + '%'
 
             tcp_part = packet_received[TCP]
             
@@ -98,7 +98,7 @@ class PacketUtils():
                 s += 'F=' + s_flags + '%'
 
             s_options = OptionsFormat()
-            s_options.set_options_by_packet(tcp_part.options)
+            s_options.create_options_from_packet(tcp_part.options)
             if s_options.representation:
                 s += 'O=' + s_options.representation + '%'
             else:

@@ -29,7 +29,7 @@ def main():
 
     #Init DB
     fingerprints_db = []
-    db_utils.parse_os_db(DB_PATH, fingerprints_db) 
+    db_utils.parse_nmap_db(DB_PATH, fingerprints_db) 
 
     #Run Tests
     fingerprint = 'Target encoded fingerprint:\n'
@@ -44,7 +44,7 @@ def main():
     # Match Results
     target_fingerprint = FingerprintRecord(db_utils, fingerprint)
     checker = CheckMatchOS()
-    checker.check_match_os(target_fingerprint, fingerprints_db)
+    checker.find_matching_os(target_fingerprint, fingerprints_db)
 
 
 if __name__ == "__main__":

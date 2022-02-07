@@ -32,7 +32,7 @@ class DBUtils():
             params[param_field] = param_values
         return params
 
-    def parse_os_db(self, db_path, fingerprints_db):
+    def parse_nmap_db(self, db_path, fingerprints_db):
         """
         Parse NMAP Fingerprint Database into list of FingerprintRecords
         """

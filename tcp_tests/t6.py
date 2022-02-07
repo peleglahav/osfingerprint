@@ -18,5 +18,5 @@ class T6(TBase):
         
 
         p = ip/tcp
-        r = self.utils.send_test_packet(p, 'T6')
+        r = self.utils.send_packet(p, 'T6')
         return (p, r)
