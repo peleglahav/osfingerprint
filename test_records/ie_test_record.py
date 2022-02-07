@@ -11,6 +11,10 @@ class IETestRecord():
             self.reply_code = params['CD']
             
     def calculate_test_match_score(self, other):
+        """
+        Scoring method for NMAP ICMP Echo test
+        Implemented as stated in NMAP Documentation
+        """
         score = 0
         if not self.responsed and not other.responsed:
             score += 50

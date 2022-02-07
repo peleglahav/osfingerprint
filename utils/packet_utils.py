@@ -8,6 +8,10 @@ class PacketUtils():
         pass
 
     def send_test_packet(self, packet, test_name):
+        """
+        Send the packet using scapy.
+        Notice the log level of scapy and the fact that it sniffs in raw.
+        """
         logging.info(f'Start: {test_name}')
         r = sr1(packet, verbose=self.explain, timeout=2) #Beggin emission. Finished sending 1 package. Received 1 packets, got 0 answers, remaining 1 packets
         if self.explain:
@@ -19,6 +23,9 @@ class PacketUtils():
         return r
 
     def get_initial_ttl_guess(self, ttl):
+        """
+        Return a proximate TTL guessed based on common values
+        """
         if (ttl <= 32):
             return 32
         elif ttl <= 64:
@@ -29,6 +36,10 @@ class PacketUtils():
             return 255
     
     def get_test_record_from_packet(self, number, packet_sent, packet_received):
+        """
+        Create a test encoding string based on NMAP format
+        Built on the packages sent back
+        """
         s = 'T' + str(number) + '('
         
         if packet_received:

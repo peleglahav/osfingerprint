@@ -2,6 +2,10 @@ from test_records.t_test_record import TTestRecord
 from test_records.ie_test_record import IETestRecord
 
 class FingerprintRecord():
+    """
+    Holds the data that will define a fingerprint record both 
+    in the database and in the target machine
+    """
     def __init__(self, utils, fingerprint):
         self.fingerprint_str = fingerprint
         fingerprint_lines = fingerprint.split('\n')[:-1]

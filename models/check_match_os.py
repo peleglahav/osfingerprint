@@ -5,6 +5,9 @@ class CheckMatchOS:
         pass
 
     def __calculate_match_score(self, fingerprint, other):
+        """
+        Compare a single print with another and return score 
+        """
         return (fingerprint.T2.calculate_test_match_score(2, other.T2) +
                 fingerprint.T3.calculate_test_match_score(3, other.T3) +
                 fingerprint.T4.calculate_test_match_score(4, other.T4) +
@@ -14,6 +17,9 @@ class CheckMatchOS:
                 fingerprint.IE.calculate_test_match_score(other.IE))
 
     def check_match_os(self, unknown_fingerprint, fingerprints_db):
+        """
+        Iterate over fingerprint DB and find fingerprint with highest score
+        """
         match_fingerprint = None
         max_score = 0
 
@@ -23,8 +29,5 @@ class CheckMatchOS:
                 match_fingerprint = f
                 max_score = score
 
-        #logging.info('Top match')
         logging.info(f'Top Match Score: {max_score}\nMatched {str(match_fingerprint)}\n')
-
-
         return match_fingerprint

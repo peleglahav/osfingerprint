@@ -7,6 +7,14 @@ class IETest():
         self.utils = utils
 
     def run_icmp_tests(self, ip):
+        """
+        Create IE-Packet 1 and IE-Packet 2
+        Send the packets to the targets and compare the results
+        The results of both of these probes are combined into a IE line containing the R, DFI, T, TG, and CD tests.
+        The R value is only true (Y) if both probes elicit responses.
+        The T, and CD values are for the response to the first probe only, since they are highly unlikely to differ.
+        DFI is a custom test for this special dual-probe ICMP case.
+        """
         ip_id = random.randint(20000, 30000) # Get a random IP ID
         req_id = random.randint(10000, 20000) # Get a random request ID
 

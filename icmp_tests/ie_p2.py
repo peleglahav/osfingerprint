@@ -5,6 +5,10 @@ class IEP2():
         self.utils = utils
 
     def test(self, ip, ip_id, req_id):
+        """
+        Implementing the second ICMP Echo packet that will compose IE test
+        Packet params are as stated in NMAP Research
+        """
         p = IP(dst=ip, tos=4, id=ip_id+1)
         icmp = ICMP(code=0, seq=296, id=req_id+1)
         raw = Raw(load='B' * 150)

@@ -14,41 +14,15 @@ class TTestRecord():
         self.utils = utils
         params = self.utils.split_db_test_string_to_params(test)
 
-        self.responsed = params['R'] # 'Y' / 'N'
+        self.responsed = params['R'] # Y / N
         if 'Y' in params['R']:
-            self.dont_fragment = params['DF'] # 'Y' / 'N'
+            self.dont_fragment = params['DF'] # Y / N
             self.ttl = [int(value, 16) for value in params['TG']]
             self.tcp_window_size = [int(value, 16) for value in params['W']]
             
-            '''
-            Seq test values:
-                Z   = zero
-                A   = same as ack
-                A+  = ack + 1
-                O   = other
-            '''
-            self.seq = params['S']
-
-            '''
-            ACK test values:
-                Z   = zero
-                S   = same as seq
-                S+  = seq + 1
-                O   = other
-            '''
-            self.ack = params['A']
-
-            '''
-            Flags. They must be in this order:
-                E = ECN Echo
-                U = Urgent
-                A = Acknowledgement
-                P = Push
-                R = Reset
-                S = Synchronize
-                F = Final
-            '''
-            self.tcp_flags = params['F']
+            self.seq = params['S'] # Z / A / A+ / O
+            self.ack = params['A'] # Z / S / S+ / O
+            self.tcp_flags = params['F'] # E / U / A / P / R / S / F
 
             self.tcp_options = OptionsFormat()
             self.tcp_options.set_options_by_str(params['O'][0] if 'O' in params else '')
@@ -56,6 +30,10 @@ class TTestRecord():
             self.tcp_miscellaneous = params['Q'] if 'Q' in params else None
     
     def calculate_test_match_score(self, number, other):
+        """
+        Scoring method for NMAP TCP test
+        Implemented as stated in NMAP Documentation
+        """
         number -= 2
         score = 0
         if 'N' in self.responsed and 'N' in other.responsed:

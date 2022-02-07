@@ -6,6 +6,9 @@ class DBUtils():
         pass
     
     def is_fields_match(self, self_field, other_field):
+        """
+        Checking matches of fields
+        """
         if other_field is None and self_field is None:
             return True
         elif other_field is None and '' in self_field:
@@ -19,6 +22,9 @@ class DBUtils():
         return False
 
     def split_db_test_string_to_params(self, test):
+        """
+        Split database record into params that will be used in the comparing stage
+        """
         params = {}
         for test_param in test[3:-1].split('%'):
             param_field, param_values = test_param.split('=')
@@ -27,6 +33,9 @@ class DBUtils():
         return params
 
     def parse_os_db(self, db_path, fingerprints_db):
+        """
+        Parse NMAP Fingerprint Database into list of FingerprintRecords
+        """
         with open(db_path, 'rt', encoding="utf-8") as db_file:
             fingerprint = ''
             line = db_file.readline()

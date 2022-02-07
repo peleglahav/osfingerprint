@@ -8,6 +8,9 @@ class T6(TBase):
         self.common_options = self.common_options + [('WScale', 10)]
 
     def test(self, ip, port):
+        """
+        Implementation of T6 test as stated in NMAP
+        """
         ip = IP(dst=ip, flags='DF')
         sequence_number=random.randint(20000, 30000)
         acknowledgement=random.randint(20000, 30000)

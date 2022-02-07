@@ -8,6 +8,9 @@ class T7(TBase):
         self.common_options = self.common_options + [('WScale', 15)]
 
     def test(self, ip, port):
+        """
+        Implementation of T7 test as stated in NMAP
+        """
         ip = IP(dst=ip)
         sequence_number=random.randint(20000, 30000)
         acknowledgement=random.randint(20000, 30000)

@@ -1,4 +1,7 @@
 class TBase:
+    """
+    Base class for all TCP Tests (T2-T7)
+    """
     def __init__(self, utils):
         self.number = 0
         self.utils= utils
